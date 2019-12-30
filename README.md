@@ -62,9 +62,9 @@ $ sudo docker restart nginx
 $ sudo docker pull nginx
 $ sudo docker run -d --name nginx -p 80:80 nginx
 $ sudo docker exec -it nginx bash
-$ sudo docker cp nginx:/etc/nginx/nginx.conf appdata/nginx.conf
-$ sudo docker cp nginx:/etc/nginx/conf.d appdata/conf.d
-$ sudo docker cp nginx:/usr/share/nginx/html appdata/html
+$ sudo docker cp nginx:/etc/nginx/nginx.conf ~/appdata/nginx
+$ sudo docker cp nginx:/etc/nginx/conf.d ~/appdata/nginx/conf.d
+$ sudo docker cp nginx:/usr/share/nginx/html ~/appdata/nginx/html
 $ sudo docker stop nginx
 $ sudo docker rm nginx
 ```
