@@ -1,14 +1,33 @@
 # Nginx
 
-## https
+## Usage
+
+```shell script
+# 安装docker-compose
+sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+
+# 下载证书 替换default.conf中domain_name
+git clone https://github.com/zcy0521/nginx-docker.git
+cd nginx-docker
+mkdir cert
+cp domain_name.pem domain_name.key cert/
+vi conf.d/default.conf
+
+# 运行 nginx
+sudo docker pull nginx
+sudo docker-compose -f stack.yml up -d
+```
+
+## Https
 
 [在Nginx服务器安装证书](https://help.aliyun.com/document_detail/98728.html)
 
 - 将证书下载至 `nginx/cert`
 
 ```shell script
-$ cp domain_name.pem nginx/cert
-$ cp domain_name.key nginx/cert
+mkdir cert
+cp domain_name.pem domain_name.key cert/
 ```
 
 - 编辑 `nginx/conf.d/default.conf` 替换其中的 `domain_name`
@@ -43,70 +62,11 @@ server {
 }
 ```
 
-本机测试
+- 本机测试
 
 ```shell script
-$ sudo vi /etc/hosts
+sudo vi /etc/hosts
 127.0.X.1	domain_name;
-$ sudo /etc/init.d/networking restart
-$ sudo docker restart nginx
-```
-
-## docker
-
-[Docker Hub](https://hub.docker.com/_/nginx)
-
-### docker
-
-```shell script
-$ sudo docker pull nginx
-$ sudo docker run -d --name nginx -p 80:80 nginx
-$ sudo docker exec -it nginx bash
-$ sudo docker cp nginx:/etc/nginx/nginx.conf ~/appdata/nginx
-$ sudo docker cp nginx:/etc/nginx/conf.d ~/appdata/nginx/conf.d
-$ sudo docker cp nginx:/usr/share/nginx/html ~/appdata/nginx/html
-$ sudo docker stop nginx
-$ sudo docker rm nginx
-```
-
-### docker-compose
-
-- install
-
-[Install Docker Compose](https://docs.docker.com/compose/install/)
-
-```shell script
-$ sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-$ sudo chmod +x /usr/local/bin/docker-compose
-```
-
-- stack.yml
-
-```yaml
-version: '3.1'
-
-services:
-  nginx:
-    image: nginx
-    restart: always
-    hostname: nginx
-    container_name: nginx
-    ports:
-      - 80:80
-      - 443:443
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
-      - ./conf.d:/etc/nginx/conf.d
-      - ./cert:/etc/nginx/cert
-      - ./html:/usr/share/nginx/html
-      - /var/log/nginx:/var/log/nginx
-    environment:
-      - TZ=Asia/Shanghai
-```
-
-- 运行
-
-```shell script
-$ sudo docker pull nginx
-$ sudo docker-compose -f stack.yml up -d
+sudo /etc/init.d/networking restart
+sudo docker restart nginx
 ```
