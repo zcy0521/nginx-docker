@@ -17,6 +17,14 @@ vi conf.d/default.conf
 # 运行 nginx
 sudo docker pull nginx
 sudo docker-compose -f stack.yml up -d
+
+# 修改 hosts
+sudo vi /etc/hosts
+127.0.X.1	domain_name
+sudo /etc/init.d/networking restart
+
+# 访问
+https://domain_name
 ```
 
 ## Docker
@@ -24,11 +32,11 @@ sudo docker-compose -f stack.yml up -d
 [Docker Hub](https://hub.docker.com/_/nginx)
 
 ```shell script
-$ sudo docker pull nginx
-$ sudo docker run -d --name nginx -p 80:80 nginx
-$ sudo docker exec -it nginx bash
-$ sudo docker stop nginx
-$ sudo docker rm nginx
+sudo docker pull nginx
+sudo docker run -d --name nginx -p 80:80 nginx
+sudo docker exec -it nginx bash
+sudo docker stop nginx
+sudo docker rm nginx
 ```
 
 ## Https
@@ -72,13 +80,4 @@ server {
         index  index.html index.htm;
     }
 }
-```
-
-- 本机测试
-
-```shell script
-sudo vi /etc/hosts
-127.0.X.1	domain_name;
-sudo /etc/init.d/networking restart
-sudo docker restart nginx
 ```
