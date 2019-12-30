@@ -95,11 +95,11 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - ${PWD}/appdata/nginx.conf:/etc/nginx/nginx.conf
-      - ${PWD}/appdata/conf.d:/etc/nginx/conf.d
-      - ${PWD}/appdata/cert:/etc/nginx/cert
-      - ${PWD}/appdata/html:/usr/share/nginx/html
-      - ${PWD}/appdata/log:/var/log/nginx
+      - ${HOME}/appdata/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ${HOME}/appdata/nginx/conf.d:/etc/nginx/conf.d
+      - ${HOME}/appdata/nginx/cert:/etc/nginx/cert
+      - ${HOME}/appdata/nginx/html:/usr/share/nginx/html
+      - ${HOME}/appdata/nginx/log:/var/log/nginx
     environment:
       - TZ=Asia/Shanghai
 ```
