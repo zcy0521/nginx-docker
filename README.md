@@ -62,14 +62,23 @@ $ sudo docker restart nginx
 $ sudo docker pull nginx
 $ sudo docker run -d --name nginx -p 80:80 nginx
 $ sudo docker exec -it nginx bash
-$ sudo docker cp nginx:/etc/nginx/nginx.conf ~/appdata/nginx
-$ sudo docker cp nginx:/etc/nginx/conf.d ~/appdata/nginx/conf.d
-$ sudo docker cp nginx:/usr/share/nginx/html ~/appdata/nginx/html
+$ sudo docker cp nginx:/etc/nginx/nginx.conf appdata/nginx.conf
+$ sudo docker cp nginx:/etc/nginx/conf.d appdata/conf.d
+$ sudo docker cp nginx:/usr/share/nginx/html appdata/html
 $ sudo docker stop nginx
 $ sudo docker rm nginx
 ```
 
 ### docker-compose
+
+- install
+
+[Install Docker Compose](https://docs.docker.com/compose/install/)
+
+```shell script
+$ sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+$ sudo chmod +x /usr/local/bin/docker-compose
+```
 
 - stack.yml
 
@@ -86,11 +95,11 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - ${HOME}/appdata/nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ${HOME}/appdata/nginx/conf.d:/etc/nginx/conf.d
-      - ${HOME}/appdata/nginx/cert:/etc/nginx/cert
-      - ${HOME}/appdata/nginx/html:/usr/share/nginx/html
-      - ${HOME}/appdata/nginx/log:/var/log/nginx
+      - ${PWD}/appdata/nginx.conf:/etc/nginx/nginx.conf
+      - ${PWD}/appdata/conf.d:/etc/nginx/conf.d
+      - ${PWD}/appdata/cert:/etc/nginx/cert
+      - ${PWD}/appdata/html:/usr/share/nginx/html
+      - ${PWD}/appdata/log:/var/log/nginx
     environment:
       - TZ=Asia/Shanghai
 ```
