@@ -19,6 +19,18 @@ sudo docker pull nginx
 sudo docker-compose -f stack.yml up -d
 ```
 
+## Docker
+
+[Docker Hub](https://hub.docker.com/_/nginx)
+
+```shell script
+$ sudo docker pull nginx
+$ sudo docker run -d --name nginx -p 80:80 nginx
+$ sudo docker exec -it nginx bash
+$ sudo docker stop nginx
+$ sudo docker rm nginx
+```
+
 ## Https
 
 [在Nginx服务器安装证书](https://help.aliyun.com/document_detail/98728.html)
@@ -69,16 +81,4 @@ sudo vi /etc/hosts
 127.0.X.1	domain_name;
 sudo /etc/init.d/networking restart
 sudo docker restart nginx
-```
-
-## docker
-
-[Docker Hub](https://hub.docker.com/_/nginx)
-
-```shell script
-$ sudo docker pull nginx
-$ sudo docker run -d --name nginx -p 80:80 nginx
-$ sudo docker exec -it nginx bash
-$ sudo docker stop nginx
-$ sudo docker rm nginx
 ```
