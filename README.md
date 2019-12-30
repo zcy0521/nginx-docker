@@ -70,3 +70,15 @@ sudo vi /etc/hosts
 sudo /etc/init.d/networking restart
 sudo docker restart nginx
 ```
+
+## docker
+
+[Docker Hub](https://hub.docker.com/_/nginx)
+
+```shell script
+$ sudo docker pull nginx
+$ sudo docker run -d --name nginx -p 80:80 nginx
+$ sudo docker exec -it nginx bash
+$ sudo docker stop nginx
+$ sudo docker rm nginx
+```
