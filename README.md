@@ -7,6 +7,7 @@
 sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 
+# nginx
 git clone https://github.com/zcy0521/nginx-docker.git
 cd nginx-docker
 
@@ -14,9 +15,6 @@ cd nginx-docker
 mkdir cert
 cp domain_name.pem domain_name.key cert/
 vi conf.d/ssl.conf
-
-# 替换tomcat.conf中[webappname]
-vi conf.d/tomcat.conf
 
 # 运行 nginx
 sudo docker pull nginx
@@ -29,6 +27,24 @@ sudo /etc/init.d/networking restart
 
 # 访问
 https://domain_name
+
+# tomcat
+git clone https://github.com/zcy0521/tomcat-docker.git
+cd tomcat-docker
+
+# 运行 tomcat
+sudo docker pull tomcat
+sudo docker-compose -f stack.yml up -d
+
+# 连接tomcat 替换tomcat.conf中[webappname]
+sudo docker network create my-net
+sudo docker network connect my-net nginx
+sudo docker network connect my-net tomcat1
+sudo docker network connect my-net tomcat2
+vi conf.d/tomcat.conf
+
+# 访问
+http://localhost/[webappname]
 ```
 
 ## Docker
