@@ -10,10 +10,13 @@ sudo chmod +x /usr/local/bin/docker-compose
 git clone https://github.com/zcy0521/nginx-docker.git
 cd nginx-docker
 
-# 下载证书 替换default.conf中domain_name
+# 下载证书 替换ssl.conf中domain_name
 mkdir cert
 cp domain_name.pem domain_name.key cert/
-vi conf.d/default.conf
+vi conf.d/ssl.conf
+
+# 替换tomcat.conf中[webappname]
+vi conf.d/tomcat.conf
 
 # 运行 nginx
 sudo docker pull nginx
@@ -44,8 +47,6 @@ sudo docker rm nginx
 
 ### Https
 
-[在Nginx服务器安装证书](https://help.aliyun.com/document_detail/98728.html)
-
 - 将证书下载至 `nginx/cert`
 
 ```shell script
@@ -53,7 +54,11 @@ mkdir cert
 cp domain_name.pem domain_name.key cert/
 ```
 
-- 编辑 `nginx/conf.d/default.conf` 替换其中的 `domain_name`
+- 编辑 `conf.d/ssl.conf` 替换其中的 `domain_name`
+
+[Configuring HTTPS servers](http://nginx.org/en/docs/http/configuring_https_servers.html)
+
+[在Nginx服务器安装阿里云SSL证书](https://help.aliyun.com/document_detail/98728.html)
 
 ```
 server {
@@ -67,7 +72,6 @@ server {
     }
 }
 
-# HTTPS server
 server {
     listen 443 ssl;
     server_name domain_name; # 将domain_name修改为证书绑定的域名
@@ -81,6 +85,43 @@ server {
     location / {
         root   /usr/share/nginx/html;
         index  index.html index.htm;
+    }
+}
+```
+
+### upstream
+
+- 连接tomcat
+
+[Manage a user-defined bridge](https://docs.docker.com/network/bridge/#manage-a-user-defined-bridge)
+
+[Specify custom networks](https://docs.docker.com/compose/networking/#specify-custom-networks)
+
+Networks can also be given a [custom name](https://docs.docker.com/compose/compose-file/#name-1) (since version 3.5):
+
+```yaml
+version: "3.7"
+networks:
+  my-app-net:
+    name: my-app-net
+```
+
+- 编辑 `conf.d/tomcat.conf` 替换其中的 `[webappname]`
+
+[upstream](http://nginx.org/en/docs/http/ngx_http_upstream_module.html)
+
+```
+upstream [webappname] {
+    server localhost:8081;
+    server localhost:8082;
+}
+
+server {
+    listen 80;
+    server_name [webappname];
+
+    location / {
+        proxy_pass http://[webappname];
     }
 }
 ```

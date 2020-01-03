@@ -1,4 +1,4 @@
-version: '3.1'
+version: '3.7'
 
 services:
   nginx:
@@ -17,3 +17,9 @@ services:
       - /var/log/nginx:/var/log/nginx
     environment:
       - TZ=Asia/Shanghai
+    networks:
+      - nginx_net
+
+networks:
+  nginx_net:
+    name: nginx_net
