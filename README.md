@@ -23,7 +23,7 @@ sudo vi /etc/hosts
 127.0.X.1	[DOMAIN_NAME]
 sudo /etc/init.d/networking restart
 
-# 访问 [DOMAIN_NAME]
+# 访问
 http://[DOMAIN_NAME]
 ```
 
