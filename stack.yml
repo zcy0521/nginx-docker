@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3.1'
 
 services:
   nginx:
@@ -17,9 +17,3 @@ services:
       - /var/log/nginx:/var/log/nginx
     environment:
       - TZ=Asia/Shanghai
-    networks:
-      - bridge
-
-networks:
-  bridge:
-    external: true

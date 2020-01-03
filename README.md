@@ -99,11 +99,11 @@ server {
 
 Networks can also be given a [custom name](https://docs.docker.com/compose/compose-file/#name-1) (since version 3.5):
 
-```yaml
-version: "3.7"
-networks:
-  my-app-net:
-    name: my-app-net
+```shell script
+sudo docker network create my-net
+sudo docker network connect my-net nginx
+sudo docker network connect my-net tomcat1
+sudo docker network connect my-net tomcat2
 ```
 
 - 编辑 `conf.d/tomcat.conf` 替换其中的 `[webappname]`
