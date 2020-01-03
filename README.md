@@ -10,6 +10,7 @@ sudo chmod +x /usr/local/bin/docker-compose
 # 运行 nginx
 git clone https://github.com/zcy0521/nginx-docker.git
 cd nginx-docker
+mkdir cert
 sudo docker pull nginx
 sudo docker-compose -f stack.yml up -d
 
@@ -65,7 +66,7 @@ server {
 
 ```shell script
 mkdir cert
-cp domain_name.pem domain_name.key cert/
+cp [DOMAIN_NAME].pem [DOMAIN_NAME].key cert/
 ```
 
 - 编辑 `conf.d/[DOMAIN_NAME].conf`
