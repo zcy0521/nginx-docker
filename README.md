@@ -7,9 +7,10 @@
 sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 
-# 下载证书 替换default.conf中domain_name
 git clone https://github.com/zcy0521/nginx-docker.git
 cd nginx-docker
+
+# 下载证书 替换default.conf中domain_name
 mkdir cert
 cp domain_name.pem domain_name.key cert/
 vi conf.d/default.conf
@@ -39,7 +40,9 @@ sudo docker stop nginx
 sudo docker rm nginx
 ```
 
-## Https
+## Nginx
+
+### Https
 
 [在Nginx服务器安装证书](https://help.aliyun.com/document_detail/98728.html)
 
