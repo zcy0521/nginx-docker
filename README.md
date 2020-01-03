@@ -43,8 +43,13 @@ sudo docker network connect my-net tomcat1
 sudo docker network connect my-net tomcat2
 vi conf.d/tomcat.conf
 
+# 修改 hosts
+sudo vi /etc/hosts
+127.0.X.1	[webappname].com
+sudo /etc/init.d/networking restart
+
 # 访问
-http://localhost/[webappname]
+http://[webappname].com
 ```
 
 ## Docker
@@ -122,22 +127,22 @@ sudo docker network connect my-net tomcat1
 sudo docker network connect my-net tomcat2
 ```
 
-- 编辑 `conf.d/tomcat.conf` 替换其中的 `[webappname]`
+- 编辑 `conf.d/[webappname].conf` 替换其中的 `[webappname]`
 
 [upstream](http://nginx.org/en/docs/http/ngx_http_upstream_module.html)
 
 ```
-upstream [webappname] {
-    server localhost:8081;
-    server localhost:8082;
+upstream [webappname]_server {
+    server [SERVER_IP]:[SERVER_PORT];
+    server [SERVER_IP]:[SERVER_PORT];
 }
 
 server {
     listen 80;
-    server_name [webappname];
+    server_name [webappname].com;
 
     location / {
-        proxy_pass http://[webappname];
+        proxy_pass http://[webappname]_server;
     }
 }
 ```
