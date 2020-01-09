@@ -141,7 +141,3 @@ Temporary Items
 # IntelliJ IDEA
 .idea
 *.iml
-
-# SSL Certificates
-*.pem
-*.key
