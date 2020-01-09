@@ -2,34 +2,47 @@
 
 ## Usage
 
-```shell script
-# 安装docker-compose
-sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
+- 运行 nginx
 
-# 运行 nginx
+```shell script
 git clone https://github.com/zcy0521/nginx-docker.git
 cd nginx-docker
-mkdir cert
 sudo docker pull nginx
-sudo docker-compose -f stack.yml up -d
+sudo docker-compose up -d
+```
 
-# 配置 [DOMAIN_NAME].conf
+- 配置 `[DOMAIN_NAME].conf`
+
+```shell script
 touch conf.d/[DOMAIN_NAME].conf
 vi conf.d/[DOMAIN_NAME].conf
-
-# 修改 hosts
-sudo vi /etc/hosts
-127.0.X.1	[DOMAIN_NAME]
-sudo /etc/init.d/networking restart
-
-# 访问
-http://[DOMAIN_NAME]
 ```
 
 ## Docker
 
-[Docker Hub](https://hub.docker.com/_/nginx)
+- [Get Docker Engine - Community for Debian](https://docs.docker.com/install/linux/docker-ce/debian/)
+
+```shell script
+sudo apt-get update
+sudo apt-get install apt-transport-https ca-certificates curl gnupg2 software-properties-common
+curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
+sudo apt-key fingerprint 0EBFCD88
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
+sudo apt-get update
+sudo apt-get install docker-ce docker-ce-cli containerd.io
+sudo docker run hello-world
+```
+  
+- [Install Docker Compose](https://docs.docker.com/compose/install/)
+
+```shell script
+sudo curl -L "https://github.com/docker/compose/releases/download/1.25.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+```
+
+## Nginx
+
+- [Docker Hub](https://hub.docker.com/_/nginx)
 
 ```shell script
 sudo docker pull nginx
@@ -38,8 +51,6 @@ sudo docker exec -it nginx bash
 sudo docker stop nginx
 sudo docker rm nginx
 ```
-
-## Nginx
 
 ### 配置 `[DOMAIN_NAME].conf`
 
@@ -65,7 +76,6 @@ server {
 - 将证书下载至 `nginx/cert`
 
 ```shell script
-mkdir cert
 cp [DOMAIN_NAME].pem [DOMAIN_NAME].key cert/
 ```
 
