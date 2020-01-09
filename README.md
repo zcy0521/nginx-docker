@@ -104,31 +104,16 @@ cp [DOMAIN_NAME].pem [DOMAIN_NAME].key cert/
 
 ```
 upstream [DOMAIN_NAME] {
-    server [SERVER_IP]:[SERVER_PORT];
-    server [SERVER_IP]:[SERVER_PORT];
+    server 127.0.0.1:8081;
+    server 127.0.0.1:8082;
 }
 
 server {
     listen       81;
-    server_name  [DOMAIN_NAME];
+    server_name  localhost;
 
     location / {
         proxy_pass http://[DOMAIN_NAME];
     }
 }
-```
-
-- 连接tomcat
-
-[Manage a user-defined bridge](https://docs.docker.com/network/bridge/#manage-a-user-defined-bridge)
-
-[Specify custom networks](https://docs.docker.com/compose/networking/#specify-custom-networks)
-
-Networks can also be given a [custom name](https://docs.docker.com/compose/compose-file/#name-1) (since version 3.5):
-
-```shell script
-sudo docker network create my-net
-sudo docker network connect my-net nginx
-sudo docker network connect my-net tomcat1
-sudo docker network connect my-net tomcat2
 ```
