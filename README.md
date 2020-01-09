@@ -16,6 +16,7 @@ sudo docker-compose up -d
 ```shell script
 touch conf.d/[DOMAIN_NAME].conf
 vi conf.d/[DOMAIN_NAME].conf
+sudo docker restart nginx
 ```
 
 ## Docker
@@ -52,32 +53,7 @@ sudo docker stop nginx
 sudo docker rm nginx
 ```
 
-### 配置 `[DOMAIN_NAME].conf`
-
-[Server names](http://nginx.org/en/docs/http/server_names.html)
-
-[Server Block](https://www.nginx.com/resources/wiki/start/topics/examples/server_blocks)
-
-`conf.d/[DOMAIN_NAME].conf`
-```
-server {
-    listen 80;
-    server_name [DOMAIN_NAME];
-
-    location / {
-        root   /usr/share/nginx/html;
-        index  index.html index.htm;
-    }
-}
-```
-
 ### Https
-
-- 将证书下载至 `nginx/cert`
-
-```shell script
-cp [DOMAIN_NAME].pem [DOMAIN_NAME].key cert/
-```
 
 - 编辑 `conf.d/[DOMAIN_NAME].conf`
 
@@ -114,7 +90,33 @@ server {
 }
 ```
 
+- 将证书下载至 `nginx/cert`
+
+```shell script
+cp [DOMAIN_NAME].pem [DOMAIN_NAME].key cert/
+```
+
 ### upstream
+
+- 编辑 `conf.d/[DOMAIN_NAME].conf`
+
+[upstream](http://nginx.org/en/docs/http/ngx_http_upstream_module.html)
+
+```
+upstream [DOMAIN_NAME] {
+    server [SERVER_IP]:[SERVER_PORT];
+    server [SERVER_IP]:[SERVER_PORT];
+}
+
+server {
+    listen       81;
+    server_name  [DOMAIN_NAME];
+
+    location / {
+        proxy_pass http://[DOMAIN_NAME];
+    }
+}
+```
 
 - 连接tomcat
 
@@ -129,21 +131,4 @@ sudo docker network create my-net
 sudo docker network connect my-net nginx
 sudo docker network connect my-net tomcat1
 sudo docker network connect my-net tomcat2
-```
-
-- 编辑 `conf.d/[DOMAIN_NAME].conf`
-
-[upstream](http://nginx.org/en/docs/http/ngx_http_upstream_module.html)
-
-```
-upstream backend {
-    server [SERVER_IP]:[SERVER_PORT];
-    server [SERVER_IP]:[SERVER_PORT];
-}
-
-server {
-    location / {
-        proxy_pass http://backend;
-    }
-}
 ```
