@@ -41,7 +41,8 @@ cp [DOMAIN_NAME].key cert/
 
 - 编辑 `conf.d/[DOMAIN_NAME].conf`
 
-```
+```shell script
+touch conf.d/[DOMAIN_NAME].conf
 server {
     listen       80;
     server_name  [DOMAIN_NAME];
@@ -117,7 +118,8 @@ cp [DOMAIN_NAME].key cert/
 
 [在Nginx服务器安装阿里云SSL证书](https://help.aliyun.com/document_detail/98728.html)
 
-```
+```shell script
+touch conf.d/[DOMAIN_NAME].conf
 server {
     listen       80;
     server_name  [DOMAIN_NAME]; # 将[DOMAIN_NAME]修改为证书绑定的域名
