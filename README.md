@@ -31,7 +31,7 @@ git clone https://github.com/zcy0521/nginx-docker.git
 cd nginx-docker
 ```
 
-- 将证书下载至 `nginx/cert`
+- 上传证书至 `nginx/cert`
 
 ```shell script
 mkdir cert
@@ -105,7 +105,7 @@ sudo docker rm nginx
 
 ### Https
 
-- 将证书下载至 `nginx/cert`
+- 上传证书至 `nginx/cert`
 
 ```shell script
 mkdir cert
