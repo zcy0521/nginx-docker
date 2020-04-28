@@ -43,6 +43,7 @@ cp [DOMAIN_NAME].key cert/
 
 ```shell script
 touch conf.d/[DOMAIN_NAME].conf
+nano conf.d/[DOMAIN_NAME].conf
 server {
     listen       80;
     server_name  [DOMAIN_NAME];
@@ -63,8 +64,8 @@ server {
 server {
     listen 443 ssl;
     server_name [DOMAIN_NAME];
-    ssl_certificate cert/domain_name.pem;
-    ssl_certificate_key cert/domain_name.key;
+    ssl_certificate cert/[DOMAIN_NAME].pem;
+    ssl_certificate_key cert/[DOMAIN_NAME].key;
     ssl_session_timeout 5m;
     ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;
     ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
@@ -120,6 +121,7 @@ cp [DOMAIN_NAME].key cert/
 
 ```shell script
 touch conf.d/[DOMAIN_NAME].conf
+nano conf.d/[DOMAIN_NAME].conf
 server {
     listen       80;
     server_name  [DOMAIN_NAME]; # 将[DOMAIN_NAME]修改为证书绑定的域名
@@ -140,8 +142,8 @@ server {
 server {
     listen 443 ssl;
     server_name [DOMAIN_NAME];
-    ssl_certificate cert/domain_name.pem;
-    ssl_certificate_key cert/domain_name.key;
+    ssl_certificate cert/[DOMAIN_NAME].pem;
+    ssl_certificate_key cert/[DOMAIN_NAME].key;
     ssl_session_timeout 5m;
     ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;
     ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
