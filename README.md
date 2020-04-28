@@ -31,19 +31,19 @@ git clone https://github.com/zcy0521/nginx-docker.git
 cd nginx-docker
 ```
 
-- 上传证书至 `cert/`
+- 上传证书至 `nginx/cert/`
 
 ```shell script
-mkdir cert
-cp [DOMAIN_NAME].pem cert/
-cp [DOMAIN_NAME].key cert/
+mkdir nginx/cert
+cp [DOMAIN_NAME].pem nginx/cert/
+cp [DOMAIN_NAME].key nginx/cert/
 ```
 
-- 编辑 `conf.d/[DOMAIN_NAME].conf`
+- 编辑 `nginx/conf.d/[DOMAIN_NAME].conf`
 
 ```shell script
-touch conf.d/[DOMAIN_NAME].conf
-nano conf.d/[DOMAIN_NAME].conf
+touch nginx/conf.d/[DOMAIN_NAME].conf
+nano nginx/conf.d/[DOMAIN_NAME].conf
 server {
     listen       80;
     server_name  [DOMAIN_NAME];
@@ -105,23 +105,23 @@ sudo docker rm nginx
 
 ### Https
 
-- 上传证书至 `cert/`
+- 上传证书至 `nginx/cert/`
 
 ```shell script
-mkdir cert
-cp [DOMAIN_NAME].pem cert/
-cp [DOMAIN_NAME].key cert/
+mkdir nginx/cert
+cp [DOMAIN_NAME].pem nginx/cert/
+cp [DOMAIN_NAME].key nginx/cert/
 ```
 
-- 编辑 `conf.d/[DOMAIN_NAME].conf`
+- 编辑 `nginx/conf.d/[DOMAIN_NAME].conf`
 
 [Configuring HTTPS servers](http://nginx.org/en/docs/http/configuring_https_servers.html)
 
 [在Nginx服务器安装阿里云SSL证书](https://help.aliyun.com/document_detail/98728.html)
 
 ```shell script
-touch conf.d/[DOMAIN_NAME].conf
-nano conf.d/[DOMAIN_NAME].conf
+touch nginx/conf.d/[DOMAIN_NAME].conf
+nano nginx/conf.d/[DOMAIN_NAME].conf
 server {
     listen       80;
     server_name  [DOMAIN_NAME]; # 将[DOMAIN_NAME]修改为证书绑定的域名
