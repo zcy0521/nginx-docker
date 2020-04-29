@@ -102,7 +102,7 @@ server {
 - 重启nginx
 
 ```shell script
-sudo docker-compose up -d
+sudo docker restart nginx
 ```
 
 ### upstream
@@ -134,5 +134,5 @@ server {
 - 重启nginx
 
 ```shell script
-sudo docker-compose up -d
+sudo docker restart nginx
 ```
