@@ -1,5 +1,13 @@
 # Nginx Docker
 
+## Usage
+
+```shell script
+git clone https://github.com/zcy0521/nginx-docker.git
+cd nginx-docker
+docker-compose up -d
+```
+
 ## Docker
 
 ### Install
@@ -34,14 +42,6 @@ docker run -d --name nginx -p 80:80 nginx
 docker exec -it nginx bash
 docker stop nginx
 docker rm nginx
-```
-
-## Usage
-
-```shell script
-git clone https://github.com/zcy0521/nginx-docker.git
-cd nginx-docker
-docker-compose up -d
 ```
 
 ## Nginx
