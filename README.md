@@ -125,7 +125,7 @@ upstream [APP_NAME] {
 }
 
 server {
-    listen       [APP_PORT];
+    listen       80;
     server_name  [DOMAIN_NAME];
 
     location / {
