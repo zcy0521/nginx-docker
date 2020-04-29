@@ -109,8 +109,6 @@ sudo docker restart nginx
 
 [upstream](http://nginx.org/en/docs/http/ngx_http_upstream_module.html)
 
-- 部署tomcat项目
-
 - 新建配置文件
 
 ```shell script
