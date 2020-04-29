@@ -14,5 +14,3 @@ services:
       - ./conf.d:/etc/nginx/conf.d
       - ./html:/usr/share/nginx/html
       - ./cert:/etc/nginx/cert
-    environment:
-      - TZ=Asia/Shanghai

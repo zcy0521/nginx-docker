@@ -25,11 +25,11 @@ sudo chmod +x /usr/local/bin/docker-compose
 - nginx
 
 ```shell script
-sudo docker pull nginx
-sudo docker run -d --name nginx -p 80:80 nginx
-sudo docker exec -it nginx bash
-sudo docker stop nginx
-sudo docker rm nginx
+docker pull nginx
+docker run -d --name nginx -p 80:80 nginx
+docker exec -it nginx bash
+docker stop nginx
+docker rm nginx
 ```
 
 ## Usage
@@ -37,7 +37,7 @@ sudo docker rm nginx
 ```shell script
 git clone https://github.com/zcy0521/nginx-docker.git
 cd nginx-docker
-sudo docker-compose up -d
+docker-compose up -d
 ```
 
 ## Nginx
@@ -102,7 +102,7 @@ server {
 - 重启nginx
 
 ```shell script
-sudo docker restart nginx
+docker restart nginx
 ```
 
 ### upstream
@@ -132,5 +132,5 @@ server {
 - 重启nginx
 
 ```shell script
-sudo docker restart nginx
+docker restart nginx
 ```
