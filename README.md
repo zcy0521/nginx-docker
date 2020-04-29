@@ -37,7 +37,6 @@ sudo docker rm nginx
 ```shell script
 git clone https://github.com/zcy0521/nginx-docker.git
 cd nginx-docker
-git pull
 sudo docker-compose up -d
 ```
 
