@@ -2,7 +2,9 @@
 
 ## Docker
 
-- [Get Docker Engine - Community for Debian](https://docs.docker.com/install/linux/docker-ce/debian/)
+### Install
+
+- [Debian](https://docs.docker.com/install/linux/docker-ce/debian)
 
 ```shell script
 sudo apt-get update
@@ -15,14 +17,16 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io
 sudo docker run hello-world
 ```
   
-- [Install Docker Compose](https://docs.docker.com/compose/install/)
+### Docker Compose
+
+- [Linux](https://docs.docker.com/compose/install/#install-compose-on-linux-systems)
 
 ```shell script
 sudo curl -L "https://github.com/docker/compose/releases/download/1.25.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 ```
 
-- nginx
+### Docker run Nginx
 
 ```shell script
 docker pull nginx
@@ -115,13 +119,14 @@ docker restart nginx
 touch conf.d/[DOMAIN_NAME].conf
 nano conf.d/[DOMAIN_NAME].conf
 upstream [APP_NAME] {
-    server 127.0.0.1:[TOMCAT_PORT];
-    server 127.0.0.1:[TOMCAT_PORT];
+    server [TOMCAT_SERVER]:[TOMCAT_PORT];
+    server [TOMCAT_SERVER]:[TOMCAT_PORT];
+    ...
 }
 
 server {
     listen       [APP_PORT];
-    server_name  localhost;
+    server_name  [DOMAIN_NAME];
 
     location / {
         proxy_pass http://[APP_NAME];
