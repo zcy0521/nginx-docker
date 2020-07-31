@@ -5,7 +5,7 @@
 ```shell script
 git clone https://github.com/zcy0521/nginx-docker.git
 cd nginx-docker
-docker-compose up -d
+docker stack deploy -c stack.yml nginx
 ```
 
 ## Docker
@@ -35,6 +35,8 @@ sudo chmod +x /usr/local/bin/docker-compose
 ```
 
 ### Docker run Nginx
+
+[Docker Hub](https://hub.docker.com/_/nginx)
 
 ```shell script
 docker pull nginx
