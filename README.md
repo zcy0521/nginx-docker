@@ -5,7 +5,8 @@
 ```shell script
 git clone https://github.com/zcy0521/nginx-docker.git
 cd nginx-docker
-docker stack deploy -c stack.yml nginx
+docker-compose up -d
+docker-compose ps
 ```
 
 ## Docker
