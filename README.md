@@ -7,6 +7,8 @@ git clone https://github.com/zcy0521/nginx-docker.git
 cd nginx-docker
 docker-compose up -d
 docker-compose ps
+docker-compose stop
+docker-compose rm
 ```
 
 ## Docker
