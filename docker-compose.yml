@@ -4,7 +4,7 @@ services:
   nginx:
     image: nginx
     restart: always
-    container_name: nginx
+    hostname: nginx
     ports:
       - 80:80
       - 443:443
