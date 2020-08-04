@@ -5,10 +5,10 @@
 ```shell script
 git clone https://github.com/zcy0521/nginx-docker.git
 cd nginx-docker
-docker-compose up -d
-docker-compose ps
-docker-compose stop
-docker-compose rm
+sudo docker-compose up -d
+sudo docker-compose ps
+sudo docker-compose stop
+sudo docker-compose rm
 ```
 
 ## Docker
@@ -25,6 +25,7 @@ sudo apt-key fingerprint 0EBFCD88
 sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
 sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io
+sudo docker run hello-world
 ```
 
 - [Ubuntu](https://docs.docker.com/engine/install/ubuntu/)
@@ -37,34 +38,17 @@ sudo apt-key fingerprint 0EBFCD88
 sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io
-```
-
-- [Windows](https://docs.docker.com/docker-for-windows/install/)
-
-开启 `Expose daemon on tcp://localhost:2375 without TLS`
-
-- 配置Docker daemon
-
-[Ubuntu环境变量](https://help.ubuntu.com/community/EnvironmentVariables)
-
-```shell script
-echo "export DOCKER_HOST=tcp://localhost:2375" >> ~/.bashrc
-source ~/.bashrc
-```
-
-- 运行hello world
-
-```shell script
 sudo docker run hello-world
 ```
-  
+
 ### Docker Compose
 
 - [Linux](https://docs.docker.com/compose/install/#install-compose-on-linux-systems)
 
 ```shell script
 sudo curl -L "https://github.com/docker/compose/releases/download/1.26.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose、
+sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 ```
 
 ### Docker run Nginx
