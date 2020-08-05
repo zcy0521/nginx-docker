@@ -2,13 +2,19 @@
 
 ## Usage
 
+- 启动
+
 ```shell script
 git clone https://github.com/zcy0521/nginx-docker.git
 cd nginx-docker
 sudo docker-compose up -d
 sudo docker-compose ps
-sudo docker-compose stop
-sudo docker-compose rm
+```
+
+- 删除
+
+```shell script
+sudo docker-compose down
 ```
 
 ## Docker
@@ -56,11 +62,7 @@ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 [Docker Hub](https://hub.docker.com/_/nginx)
 
 ```shell script
-docker pull nginx
 docker run -d --name nginx -p 80:80 nginx
-docker exec -it nginx bash
-docker stop nginx
-docker rm nginx
 ```
 
 ## Nginx
