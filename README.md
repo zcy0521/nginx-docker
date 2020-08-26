@@ -159,5 +159,5 @@ server {
 - 重启nginx
 
 ```shell script
-docker restart nginx
+sudo docker restart nginx
 ```
