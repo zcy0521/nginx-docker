@@ -62,7 +62,7 @@ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 [Docker Hub](https://hub.docker.com/_/nginx)
 
 ```shell script
-docker run -d --name nginx -p 80:80 nginx
+sudo docker run -d --name nginx -p 80:80 nginx
 ```
 
 ## Nginx
@@ -80,11 +80,12 @@ cp [DOMAIN_NAME].pem cert/
 cp [DOMAIN_NAME].key cert/
 ```
 
-- 新建配置文件
+- 新建配置文件`conf.d/`
 
 ```shell script
-touch conf.d/[DOMAIN_NAME].conf
-nano conf.d/[DOMAIN_NAME].conf
+touch [DOMAIN_NAME].conf
+nano [DOMAIN_NAME].conf
+
 server {
     listen       80;
     server_name  [DOMAIN_NAME];
@@ -127,7 +128,7 @@ server {
 - 重启nginx
 
 ```shell script
-docker restart nginx
+sudo docker restart nginx
 ```
 
 ### upstream
