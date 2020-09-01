@@ -76,19 +76,19 @@ sudo docker run -d --name nginx -p 80:80 nginx
 - 将证书文件上传至服务器
 
 ```shell script
-cp [DOMAIN_NAME].pem cert/
-cp [DOMAIN_NAME].key cert/
+cp <DOMAIN_NAME>.pem cert/
+cp <DOMAIN_NAME>.key cert/
 ```
 
 - 新建配置文件`conf.d/`
 
 ```shell script
-touch [DOMAIN_NAME].conf
-nano [DOMAIN_NAME].conf
+touch <DOMAIN_NAME>.conf
+nano <DOMAIN_NAME>.conf
 
 server {
     listen       80;
-    server_name  [DOMAIN_NAME];
+    server_name  <DOMAIN_NAME>;
     rewrite ^(.*)$ https://$host$1 permanent;
 
     location / {
@@ -105,9 +105,9 @@ server {
 # HTTPS server
 server {
     listen 443 ssl;
-    server_name [DOMAIN_NAME];
-    ssl_certificate cert/[DOMAIN_NAME].pem;
-    ssl_certificate_key cert/[DOMAIN_NAME].key;
+    server_name <DOMAIN_NAME>;
+    ssl_certificate cert/<DOMAIN_NAME>.pem;
+    ssl_certificate_key cert/<DOMAIN_NAME>.key;
     ssl_session_timeout 5m;
     ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;
     ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
@@ -138,20 +138,20 @@ sudo docker restart nginx
 - 新建配置文件
 
 ```shell script
-touch conf.d/[DOMAIN_NAME].conf
-nano conf.d/[DOMAIN_NAME].conf
-upstream [APP_NAME] {
-    server [TOMCAT_SERVER]:[TOMCAT_PORT];
-    server [TOMCAT_SERVER]:[TOMCAT_PORT];
+touch conf.d/<DOMAIN_NAME>.conf
+nano conf.d/<DOMAIN_NAME>.conf
+upstream <APP_NAME> {
+    server <TOMCAT_SERVER>:<TOMCAT_PORT>;
+    server <TOMCAT_SERVER>:<TOMCAT_PORT>;
     ...
 }
 
 server {
     listen       80;
-    server_name  [DOMAIN_NAME];
+    server_name  <DOMAIN_NAME>;
 
     location / {
-        proxy_pass http://[APP_NAME];
+        proxy_pass http://<APP_NAME>;
     }
 }
 ```
