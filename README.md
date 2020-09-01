@@ -83,8 +83,7 @@ cp <DOMAIN_NAME>.key cert/
 - 新建配置文件`conf.d/`
 
 ```shell script
-touch <DOMAIN_NAME>.conf
-nano <DOMAIN_NAME>.conf
+nano conf.d/<DOMAIN_NAME>.conf
 
 server {
     listen       80;
@@ -106,6 +105,7 @@ server {
 server {
     listen 443 ssl;
     server_name <DOMAIN_NAME>;
+
     ssl_certificate cert/<DOMAIN_NAME>.pem;
     ssl_certificate_key cert/<DOMAIN_NAME>.key;
     ssl_session_timeout 5m;
@@ -114,9 +114,9 @@ server {
     ssl_prefer_server_ciphers on;
 
     location / {
-            root   /usr/share/nginx/html;
-            index  index.html index.htm;
-        }
+        root   /usr/share/nginx/html;
+        index  index.html index.htm;
+    }
     
     error_page   500 502 503 504  /50x.html;
     location = /50x.html {
@@ -138,8 +138,8 @@ sudo docker restart nginx
 - 新建配置文件
 
 ```shell script
-touch conf.d/<DOMAIN_NAME>.conf
 nano conf.d/<DOMAIN_NAME>.conf
+
 upstream <APP_NAME> {
     server <TOMCAT_SERVER>:<TOMCAT_PORT>;
     server <TOMCAT_SERVER>:<TOMCAT_PORT>;
@@ -147,8 +147,15 @@ upstream <APP_NAME> {
 }
 
 server {
-    listen       80;
-    server_name  <DOMAIN_NAME>;
+    listen 443 ssl;
+    server_name <DOMAIN_NAME>;
+
+    ssl_certificate cert/<DOMAIN_NAME>.pem;
+    ssl_certificate_key cert/<DOMAIN_NAME>.key;
+    ssl_session_timeout 5m;
+    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+    ssl_prefer_server_ciphers on;
 
     location / {
         proxy_pass http://<APP_NAME>;
